@@ -1,0 +1,61 @@
+<form id="form">
+  <div>
+    <label for="">
+      Title:
+    </label>
+    <input name="title" type="text" id="" required />
+  </div>
+  <div>
+    <label for="">
+      Description:
+    </label>
+    <input name="description" type="text" id="" required />
+  </div>
+  <div>
+    <label for="">
+      Price:
+    </label>
+    <input name="price" type="number" id="" required />
+  </div>
+  <div>
+    <label for="">
+      Code:
+    </label>
+    <input name="code" type="text" id="" required />
+  </div>
+  <div>
+    <label for="">
+      Stock:
+    </label>
+    <input name="stock" type="number" id="" required />
+  </div>
+  <div>
+    <input name="status" type="checkbox" value="true" id="checkChecked" checked="" />
+    <label for="checkChecked">
+      Status
+    </label>
+  </div>
+  <div>
+    <label for="">
+      Category:
+    </label>
+    <input name="category" type="text" id="" required />
+  </div>
+  <div>
+    <label for="">
+      Thumbnails:
+    </label>
+    <input name="thumbnails" type="file" id="" />
+  </div>
+  <div>
+    <button type="submit">Enviar producto</button>
+  </div>
+</form>
+<br />
+<br />
+<div id="products">
+
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/realTimeProducts.js"></script>

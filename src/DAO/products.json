@@ -1,0 +1,112 @@
+[
+  {
+    "title": "Smartphone Samsung Galaxy S21",
+    "description": "Último modelo de Samsung con pantalla AMOLED de 6.2 pulgadas, procesador Snapdragon 888, 8GB de RAM y cámara trasera triple de 12MP",
+    "price": 999,
+    "code": "SSG21",
+    "stock": 50,
+    "id": 1,
+    "status": true,
+    "category": "Electrónica",
+    "thumbnails": ["https://example.com/samsung-galaxy-s21-thumbnail.jpg"]
+  },
+  {
+    "title": "Laptop Dell XPS 13",
+    "description": "Laptop ultradelgada con procesador Intel Core i7 de décima generación, 16GB de RAM y pantalla táctil de 13.3 pulgadas con resolución 4K",
+    "price": 1299,
+    "code": "DELLXPS13",
+    "stock": 20,
+    "id": 2,
+    "status": true,
+    "category": "Computadoras",
+    "thumbnails": ["https://example.com/dell-xps-13-thumbnail.jpg"]
+  },
+  {
+    "title": "Cámara Sony Alpha a7 III",
+    "description": "Cámara mirrorless con sensor full-frame de 24.2 megapíxeles, estabilización de imagen de 5 ejes y grabación de video 4K",
+    "price": 2199,
+    "code": "SONYA7III",
+    "stock": 15,
+    "id": 3,
+    "status": true,
+    "category": "Cámaras",
+    "thumbnails": ["https://example.com/sony-alpha-a7-iii-thumbnail.jpg"]
+  },
+  {
+    "title": "Smartwatch Apple Watch Series 6",
+    "description": "Reloj inteligente con pantalla retina siempre encendida, sensor de oxígeno en sangre, GPS integrado y resistencia al agua de hasta 50 metros",
+    "price": 399,
+    "code": "APWATCH6",
+    "stock": 30,
+    "id": 4,
+    "status": true,
+    "category": "Electrónica",
+    "thumbnails": ["https://example.com/apple-watch-series-6-thumbnail.jpg"]
+  },
+  {
+    "title": "Altavoz inteligente Amazon Echo (4ª generación)",
+    "description": "Altavoz inteligente con asistente virtual Alexa, control de hogar inteligente integrado y sonido de alta calidad con tecnología Dolby Atmos",
+    "price": 99,
+    "code": "AMECHO4",
+    "stock": 60,
+    "id": 5,
+    "status": true,
+    "category": "Electrónica",
+    "thumbnails": ["https://example.com/amazon-echo-4th-gen-thumbnail.jpg"]
+  },
+  {
+    "title": "Tablet Apple iPad Pro",
+    "description": "Tablet de alta gama con pantalla Liquid Retina de 11 pulgadas, chip M1 de Apple, cámara trasera de 12 MP y cámara frontal TrueDepth de 12 MP con función de retrato",
+    "price": 799,
+    "code": "IPADPRO11",
+    "stock": 25,
+    "id": 6,
+    "status": true,
+    "category": "Tablets",
+    "thumbnails": ["https://example.com/apple-ipad-pro-11-thumbnail.jpg"]
+  },
+  {
+    "title": "Smart TV LG OLED CX",
+    "description": "Televisor inteligente con pantalla OLED de 55 pulgadas, resolución 4K, tecnología HDR, soporte para Dolby Vision y asistente de voz integrado",
+    "price": 1499,
+    "code": "LGOLEDCX55",
+    "stock": 10,
+    "id": 7,
+    "status": true,
+    "category": "Televisores",
+    "thumbnails": ["https://example.com/lg-oled-cx-55-thumbnail.jpg"]
+  },
+  {
+    "title": "Consola de videojuegos Sony PlayStation 5",
+    "description": "La última consola de Sony con unidad de estado sólido (SSD), soporte para ray tracing, controlador DualSense con retroalimentación háptica y gatillos adaptativos",
+    "price": 499,
+    "code": "PS5",
+    "stock": 5,
+    "id": 8,
+    "status": true,
+    "category": "Consolas",
+    "thumbnails": ["https://example.com/sony-playstation-5-thumbnail.jpg"]
+  },
+  {
+    "title": "Impresora 3D Creality Ender 3 Pro",
+    "description": "Impresora 3D de escritorio con tamaño de impresión de 220 x 220 x 250 mm, estructura mejorada y función de recuperación de impresión",
+    "price": 269,
+    "code": "E3PRO",
+    "stock": 12,
+    "id": 9,
+    "status": true,
+    "category": "Impresoras 3D",
+    "thumbnails": ["https://example.com/creality-ender-3-pro-thumbnail.jpg"]
+  },
+  {
+    "title": "Drone DJI Mavic Air 2",
+    "description": "Drone con cámara de 48 MP, estabilización de 3 ejes y tiempo de vuelo de hasta 34 minutos, con sensor anti-colisión y seguimiento de objetos",
+    "price": 799,
+    "code": "DJIAIR2",
+    "stock": 8,
+    "id": 10,
+    "status": true,
+    "category": "Drones",
+    "thumbnails": ["https://example.com/dji-mavic-air-2-thumbnail.jpg"]
+  }
+]

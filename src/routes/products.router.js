@@ -1,87 +1,102 @@
 import { Router } from "express";
-import { manager } from "../ProductManager/Manager.js";
-import { Product } from "../ProductManager/ProductManager.js";
+import ProductManager from "../DAO/ProductManager.js";
 
 const router = Router();
 
-// Obtener todos los productos
-router.get("/", async (req, res) => {
-  const data = await manager.getProducts();
-  console.log(data);
-  res.json(data);
-});
+const pm = new ProductManager();
 
-// Obtener un producto por ID
-router.get("/:pid", async (req, res) => {
+//http://localhost:8080/api/products?limit=2
+router.get("/", async (request, response) => {
   try {
-    const { pid } = req.params;
-    const item = await manager.getProductById(Number(pid));
-    res.send(item);
-  } catch (e) {
-    console.error(e);
-    res.status(500).send("Product not found");
-  }
-});
+    //Limit recibido
+    let { limit } = request.query;
 
-// Crear un nuevo producto
-router.post("/", async (req, res) => {
-  try {
-    const { title, description, code, price, status, stock = 1, category, thumbnails } = req.body;
+    // Productos
+    const products = await pm.getProducts();
 
-    // Verificar que todos los campos necesarios están presentes en el body
-    if (!title || !description || !code || !price || !status || !category || !thumbnails) {
-      console.error("Product definition incomplete");
-      res.status(400).send();
-      return;
+    // Si no se pasa un limit devuelve todos los productos
+    if (!limit) return response.status(200).send({ products });
+
+    // parseo de limit
+    if (isNaN(Number(limit))) return response.status(400).send({ message: "The limit is invalid" });
+    limit = Number(limit);
+
+    ("Si el limit es menor a cero se devuelve un error");
+    if (limit < 0) return response.status(400).send({ message: "The limit cannot be less than 0" });
+    // Si el límite es menor a la cantidad de productos disponibles entra al condicional
+    if (products.length > limit) {
+      const limitProduct = products.slice(0, limit);
+      return response.status(200).send({ limit, products: limitProduct });
     }
 
-    const newProduct = new Product(title, description, price, category, thumbnails, code, stock, status);
-    const newProductCreated = await manager.addProduct(newProduct);
-
-    res.json(newProductCreated);
-  } catch (e) {
-    console.error(e);
-    res.status(500).send("Error on create product, please check logs");
+    // Caso de que el limit sea mayor a lo disponible
+    return response.status(200).send({ products });
+  } catch (err) {
+    console.log(err);
   }
 });
 
-// Actualizar un producto existente
-router.put("/:pid", async (req, res) => {
+router.get("/:pid", async (request, response) => {
   try {
-    const pid = req.params.pid;
-    const { title, description, code, price, status, stock, category, thumbnails } = req.body;
+    const { pid } = request.params;
 
-    // Verificar que se ha enviado el ID del producto a actualizar
-    if (!pid) return res.status(400).send("Not send the pid");
+    // Consulta si el parámetro es un número ya que el ID es numérico
+    if (isNaN(Number(pid))) {
+      return response.status(400).send({ message: "Invalid identification" });
+    }
 
-    const updatedProduct = await manager.updateProduct(Number(pid), {
-      title,
-      description,
-      code,
-      price,
-      status,
-      stock,
-      category,
-      thumbnails,
-    });
-    res.json(updatedProduct);
-  } catch (e) {
-    console.error(e);
-    const pid = req.params.pid;
-    console.log(`Error on update product ${pid}`);
-    res.status(500).send(null);
+    // Se devuelve el resultado
+    const result = await pm.getProductById(pid);
+
+    // Si el valor de status es 'error' devuelve un error
+    if (result.status === "error") return response.status(400).send(result.message);
+
+    // Resultado
+    return response.status(200).send(result);
+  } catch (err) {
+    console.log(err);
   }
 });
 
-// Eliminar un producto existente
-router.delete("/:pid", async (req, res) => {
+router.post("/", async (request, response) => {
   try {
-    const { pid } = req.params;
-    const isDeleteProduct = await manager.deleteProduct(Number(pid));
-    res.send(isDeleteProduct);
-  } catch (e) {
-    console.error(e);
-    res.status(500).send("Error deleting product");
+    const product = request.body;
+
+    const result = await pm.addProduct(product);
+
+    if (result.status === "error") return response.status(400).send(result.message);
+
+    return response.status(201).send({ result: result.message, product });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.put("/:pid", async (request, response) => {
+  try {
+    const { pid } = request.params;
+    const product = request.body;
+
+    const result = await pm.updateProduct(Number(pid), product);
+
+    if (result.status === "error") return response.status(400).send({ result });
+
+    return response.status(200).send(`${result.message} whit ID: ${pid}`);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.delete("/:pid", async (request, response) => {
+  try {
+    const { pid } = request.params;
+    const result = await pm.deleteProduct(Number(pid));
+
+    if (result.status === "error") return response.status(400).send(result.message);
+
+    return response.status(200).send(result.message);
+  } catch (err) {
+    console.log(err);
   }
 });
 
