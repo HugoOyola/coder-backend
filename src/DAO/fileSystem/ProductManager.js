@@ -4,7 +4,7 @@ class ProductManager {
 
     constructor() {
         this.products = [];
-        this.path = './src/DAO/products.json';
+        this.path = './src/DAO/fileSystem/products.json';
 
     };
 
@@ -86,7 +86,7 @@ class ProductManager {
 
             if (result.status === 'error') return result
 
-            
+
             const product = result.find(product => product.id === id)
             return { product };
         }
@@ -98,10 +98,10 @@ class ProductManager {
     };
 
     updateProduct = async (pid, updateObject) => {
-        
+
         try {
             const productsOfFS = await this.#checkID(pid)
-            
+
             if (productsOfFS.status === 'error') return productsOfFS
 
             this.products = productsOfFS.map(element => {
@@ -113,7 +113,7 @@ class ProductManager {
             })
 
             this.#saveProductsFS(pid);
-            
+
             return { status: 'success', message: 'Product successfully updated' }
         }
         catch (err) {
@@ -131,7 +131,7 @@ class ProductManager {
 
             if (result.status === 'error') return result
 
-            
+
 
             this.products = result.filter(product => product.id !== id)
 
@@ -164,23 +164,23 @@ class ProductManager {
                 thumbnails
             }
 
-            
+
 
             const result = (Object.values(product).every(property => property))
-            
+
             if (!result) return { status: 'error', message: 'Product could not be added, is not complete' };
-            
-            if (!(typeof title === 'string' && 
-                typeof description === 'string' && 
-                typeof price === 'number' && 
-                typeof code === 'string' && 
-                typeof stock === 'number' && 
-                typeof status === 'boolean' && 
-                typeof category === 'string' && 
-                Array.isArray(thumbnails))) 
+
+            if (!(typeof title === 'string' &&
+                typeof description === 'string' &&
+                typeof price === 'number' &&
+                typeof code === 'string' &&
+                typeof stock === 'number' &&
+                typeof status === 'boolean' &&
+                typeof category === 'string' &&
+                Array.isArray(thumbnails)))
                 return { status: 'error', message:'type of property is not valid' }
 
-            
+
 
             return this.#validateCodeProduct(product)
         }

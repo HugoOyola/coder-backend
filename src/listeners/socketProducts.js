@@ -1,4 +1,4 @@
-import ProductManager from "../DAO/mongo/managers/products.js";
+import ProductManager from "../dao/mongo/managers/products.js";
 
 // Crear una instancia de ProductManager
 const pm = new ProductManager();

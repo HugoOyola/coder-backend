@@ -8,7 +8,9 @@
     "id": 1,
     "status": true,
     "category": "Electrónica",
-    "thumbnails": ["https://example.com/samsung-galaxy-s21-thumbnail.jpg"]
+    "thumbnails": [
+      "https://example.com/samsung-galaxy-s21-thumbnail.jpg"
+    ]
   },
   {
     "title": "Laptop Dell XPS 13",
@@ -19,7 +21,9 @@
     "id": 2,
     "status": true,
     "category": "Computadoras",
-    "thumbnails": ["https://example.com/dell-xps-13-thumbnail.jpg"]
+    "thumbnails": [
+      "https://example.com/dell-xps-13-thumbnail.jpg"
+    ]
   },
   {
     "title": "Cámara Sony Alpha a7 III",
@@ -30,7 +34,9 @@
     "id": 3,
     "status": true,
     "category": "Cámaras",
-    "thumbnails": ["https://example.com/sony-alpha-a7-iii-thumbnail.jpg"]
+    "thumbnails": [
+      "https://example.com/sony-alpha-a7-iii-thumbnail.jpg"
+    ]
   },
   {
     "title": "Smartwatch Apple Watch Series 6",
@@ -41,7 +47,9 @@
     "id": 4,
     "status": true,
     "category": "Electrónica",
-    "thumbnails": ["https://example.com/apple-watch-series-6-thumbnail.jpg"]
+    "thumbnails": [
+      "https://example.com/apple-watch-series-6-thumbnail.jpg"
+    ]
   },
   {
     "title": "Altavoz inteligente Amazon Echo (4ª generación)",
@@ -52,7 +60,9 @@
     "id": 5,
     "status": true,
     "category": "Electrónica",
-    "thumbnails": ["https://example.com/amazon-echo-4th-gen-thumbnail.jpg"]
+    "thumbnails": [
+      "https://example.com/amazon-echo-4th-gen-thumbnail.jpg"
+    ]
   },
   {
     "title": "Tablet Apple iPad Pro",
@@ -63,7 +73,9 @@
     "id": 6,
     "status": true,
     "category": "Tablets",
-    "thumbnails": ["https://example.com/apple-ipad-pro-11-thumbnail.jpg"]
+    "thumbnails": [
+      "https://example.com/apple-ipad-pro-11-thumbnail.jpg"
+    ]
   },
   {
     "title": "Smart TV LG OLED CX",
@@ -74,7 +86,9 @@
     "id": 7,
     "status": true,
     "category": "Televisores",
-    "thumbnails": ["https://example.com/lg-oled-cx-55-thumbnail.jpg"]
+    "thumbnails": [
+      "https://example.com/lg-oled-cx-55-thumbnail.jpg"
+    ]
   },
   {
     "title": "Consola de videojuegos Sony PlayStation 5",
@@ -85,7 +99,9 @@
     "id": 8,
     "status": true,
     "category": "Consolas",
-    "thumbnails": ["https://example.com/sony-playstation-5-thumbnail.jpg"]
+    "thumbnails": [
+      "https://example.com/sony-playstation-5-thumbnail.jpg"
+    ]
   },
   {
     "title": "Impresora 3D Creality Ender 3 Pro",
@@ -96,7 +112,9 @@
     "id": 9,
     "status": true,
     "category": "Impresoras 3D",
-    "thumbnails": ["https://example.com/creality-ender-3-pro-thumbnail.jpg"]
+    "thumbnails": [
+      "https://example.com/creality-ender-3-pro-thumbnail.jpg"
+    ]
   },
   {
     "title": "Drone DJI Mavic Air 2",
@@ -107,6 +125,34 @@
     "id": 10,
     "status": true,
     "category": "Drones",
-    "thumbnails": ["https://example.com/dji-mavic-air-2-thumbnail.jpg"]
+    "thumbnails": [
+      "https://example.com/dji-mavic-air-2-thumbnail.jpg"
+    ]
+  },
+  {
+    "title": "Laptop HP Spectre x360",
+    "description": "La laptop HP Spectre x360 es una potente y versátil computadora portátil que combina un diseño elegante y moderno con un rendimiento excepcional.",
+    "price": 1499,
+    "code": "HP360",
+    "stock": 5,
+    "status": true,
+    "category": "Electronica",
+    "thumbnails": [
+      "empty"
+    ],
+    "id": 11
+  },
+  {
+    "title": "iPhone 14",
+    "description": "Dispositivo Movil",
+    "price": 1499,
+    "code": "IP1400",
+    "stock": 5,
+    "status": true,
+    "category": "Celular",
+    "thumbnails": [
+      "empty"
+    ],
+    "id": 12
   }
 ]

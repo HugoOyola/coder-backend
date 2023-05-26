@@ -6,9 +6,9 @@ const pm = new ProductManager()
 class CartManager {
 
     constructor() {
-        
+
         this.carts = [];
-        this.path = './src/DAO/carts.json';
+        this.path = './src/DAO/fileSystem/carts.json';
         if (!fs.existsSync(this.path)) return this.#createFileCart(this.carts);
     };
 
@@ -95,12 +95,12 @@ class CartManager {
             console.log(findObj, 'find product');
             if (findObj !== -1) {
                 cartResult.products[findObj].quantity = Number(cartResult.products[findObj].quantity) + productFromBody[0].quantity;
-                
+
             }
             else{
                 cartResult.products.push(productFromBody[0]);
             }
-            
+
 
             this.carts.map(element => {
                     if (element.id === cid) {

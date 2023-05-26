@@ -9,7 +9,7 @@ export default class ProductManager {
     } catch (err) {
       return err;
     }
-  }
+  };
 
   // Obtener un producto por su ID
   getProductById = async (id) => {
@@ -18,7 +18,7 @@ export default class ProductManager {
     } catch (err) {
       return { error: err.message };
     }
-  }
+  };
 
   // Agregar un nuevo producto
   addProduct = async (product) => {
@@ -28,7 +28,7 @@ export default class ProductManager {
     } catch (err) {
       return err;
     }
-  }
+  };
 
   // Actualizar un producto existente por su ID
   updateProduct = async (id, product) => {
@@ -37,7 +37,7 @@ export default class ProductManager {
     } catch (err) {
       return err;
     }
-  }
+  };
 
   // Eliminar un producto por su ID
   deleteProduct = async (id) => {
@@ -46,5 +46,5 @@ export default class ProductManager {
     } catch (err) {
       return err;
     }
-  }
+  };
 }

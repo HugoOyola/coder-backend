@@ -1,61 +1,61 @@
-<form id="form">
-  <div>
-    <label for="">
+<form class="row g-3 mx-4" id="form">
+  <div class="col-md-4">
+    <label for="" class="form-label">
       Title:
     </label>
-    <input name="title" type="text" id="" required />
+    <input name="title" type="text" class="form-control" id="" required>
   </div>
-  <div>
-    <label for="">
+  <div class="col-md-4">
+    <label for="" class="form-label">
       Description:
     </label>
-    <input name="description" type="text" id="" required />
+    <input name="description" type="text" class="form-control" id="" required>
   </div>
-  <div>
-    <label for="">
+  <div class="col-md-4">
+    <label for="" class="form-label">
       Price:
     </label>
-    <input name="price" type="number" id="" required />
+    <input name="price" type="number" class="form-control" id="" required>
   </div>
-  <div>
-    <label for="">
+  <div class="col-md-4">
+    <label for="" class="form-label">
       Code:
     </label>
-    <input name="code" type="text" id="" required />
+    <input name="code" type="text" class="form-control" id="" required>
   </div>
-  <div>
-    <label for="">
+  <div class="col-md-4">
+    <label for="" class="form-label">
       Stock:
     </label>
-    <input name="stock" type="number" id="" required />
+    <input name="stock" type="number" class="form-control" id="" required>
   </div>
-  <div>
-    <input name="status" type="checkbox" value="true" id="checkChecked" checked="" />
-    <label for="checkChecked">
+  <div class="form-check mx-4">
+    <input name="status" class="form-check-input" type="checkbox" value="true" id="flexCheckChecked" checked="">
+    <label class="form-check-label" for="flexCheckChecked">
       Status
     </label>
   </div>
-  <div>
-    <label for="">
+  <div class="col-md-4">
+    <label for="" class="form-label">
       Category:
     </label>
-    <input name="category" type="text" id="" required />
+    <input name="category" type="text" class="form-control" id="" required>
   </div>
-  <div>
-    <label for="">
+  <div class="col-md-4">
+    <label for="" class="form-label">
       Thumbnails:
     </label>
-    <input name="thumbnails" type="file" id="" />
+    <input name="thumbnails" type="file" class="form-control" id="">
   </div>
-  <div>
-    <button type="submit">Enviar producto</button>
+  <div class="col-12">
+    <button class="btn btn-primary" type="submit">Enviar producto</button>
   </div>
 </form>
-<br />
-<br />
-<div id="products">
+
+<div class="row mt-4" id="products">
 
 </div>
+
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/realTimeProducts.js"></script>

@@ -1,28 +1,24 @@
-// Importamos Router y ProductManager desde sus respectivos archivos
 import { Router } from "express";
-import ProductManager from "../DAO/ProductManager.js";
-
-// Creamos una instancia de Router y ProductManager
-const router = Router();
+import ProductManager from "../dao/mongo/managers/products.js";
+const routerV = Router();
 const pm = new ProductManager();
 
-// Ruta para obtener todos los productos y renderizarlos en la vista "home"
-router.get('/', async (req, res) => {
-    try {
-        const products = await pm.getProducts(); // Obtenemos los productos desde ProductManager
-        console.log(products);
-        res.render("home", { valueReturned: products }); // Renderizamos la vista "home" con los productos obtenidos
-    }
-    catch (err) {
-        console.log(err);
-        res.status(500).send({err}); // Enviamos una respuesta de error en caso de que ocurra una excepción
-    }
+routerV.get("/", async (req, res) => {
+  try {
+    const products = await pm.getProducts();
+
+    res.render("home", { valueReturned: products });
+  } catch (err) {
+    console.log(err);
+  }
 });
 
-// Ruta para renderizar la vista "realTimeProducts"
-router.use('/realTimeProducts', (req, res) => {
-    res.render('realTimeProducts', {}); // Renderizamos la vista "realTimeProducts"
+routerV.use("/realTimeProducts", (req, res) => {
+  res.render("realTimeProducts", {});
 });
 
-// Exportamos el router
-export default router;
+routerV.get("/chat", async (req, res) => {
+  res.render("chat");
+});
+
+export default routerV;

@@ -1,38 +1,78 @@
 // Importar la clase ProductManager del archivo ProductManager.js
-import ProductManager from "./DAO/ProductManager.js";
+import ProductManager from "./dao/mongo/managers/products.js";
 
 // Crear una instancia de ProductManager
 const pm = new ProductManager();
 
 // Exportar una función socketProducts que recibe un objeto socketServer como parámetro
 export default function socketProducts(socketServer) {
-  // Añadir un listener para eventos de conexión en el socketServer
-  socketServer.on("connection", async (socket) => {
-    // Obtener los productos de la instancia de ProductManager
-    const data = await pm.getProducts();
-    // Emitir un evento "products" a través del socket con los productos obtenidos
-    socket.emit("products", { data });
+    socketServer.on('connection', async socket => {
 
-    // Añadir un listener para eventos "product" en el socket
-    socket.on("product", async (data) => {
-      try {
-        // Agregar un producto a través de la instancia de ProductManager y obtener el valor de retorno
-        const valueReturned = await pm.addProduct(data);
+        const products = await pm.getProducts()
 
-        // Emitir un evento "message" a través del socket con el valor de retorno obtenido
-        socket.emit("message", valueReturned);
-      } catch (err) {
-        console.log(err);
-      }
-    });
+        socket.emit('products', { products })
 
-    // Añadir un listener para eventos "delete" en el socket
-    socket.on("delete", async (data) => {
-      // Eliminar un producto a través de la instancia de ProductManager y obtener el resultado
-      const result = await pm.deleteProduct(data);
+        socket.on('product', async data => {
 
-      // Emitir un evento "delete" a través del socket con el resultado obtenido
-      socket.emit("delete", result);
-    });
-  });
+            try {
+                const {
+                    title,
+                    description,
+                    price,
+                    code,
+                    stock,
+                    status,
+                    category,
+                    thumbnails
+                } = data
+
+                const checkProduct = Object.values({
+                    title,
+                    description,
+                    price,
+                    code,
+                    stock,
+                    status,
+                    category,
+                    thumbnails
+                }).every(property => property)
+
+                if(!checkProduct) {
+                    return socket.emit('message', { status: 'error', message:"The product doesn't have all the properties" })
+                }
+
+                if (!(typeof title === 'string' &&
+                        typeof description === 'string' &&
+                        typeof price === 'number' &&
+                        typeof code === 'string' &&
+                        typeof stock === 'number' &&
+                        typeof status === 'boolean' &&
+                        typeof category === 'string' &&
+                        Array.isArray(thumbnails)))
+                        return socket.emit('message', { status: 'error',message:'type of property is not valid' })
+
+                if (data.price < 0 || data.stock < 0) {
+                    return socket.emit('message', { status: 'error', message: 'Product or stock cannot be values less than or equal to zero' })
+                }
+
+                const result = await pm.addProduct(data)
+
+                const products = await pm.getProducts()
+                socket.emit('message', { status: 'success', message: `The product ${result.title} was added` } )
+                return socket.emit('products', { products })
+            }
+            catch (err) {
+                console.log(err);
+            }
+
+        })
+
+        socket.on('delete', async data => {
+            // console.log(data)
+            await pm.deleteProduct(data)
+            const products = await pm.getProducts()
+            socket.emit('products', { products })
+        })
+    })
+
 }
