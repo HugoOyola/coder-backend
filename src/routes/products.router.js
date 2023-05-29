@@ -1,57 +1,103 @@
 import { Router } from "express";
 import ProductManager from "../dao/mongo/managers/products.js";
-const routerP = Router();
 
+const routerP = Router();
 const pm = new ProductManager();
 
+// Obtener lista de productos
 routerP.get("/", async (request, response) => {
   try {
-    //Limit recibido
-    let { limit } = request.query;
+    let { limit, page, sort, category } = request.query;
+    console.log(request.originalUrl);
 
-    // Productos
-    const products = await pm.getProducts();
+    const options = {
+      page: Number(page) || 1,
+      limit: Number(limit) || 10,
+      sort: { price: Number(sort) },
+    };
 
-    // Si no se pasa un limit devuelve todos los productos
-    if (!limit) return response.status(200).send({ products });
-
-    // parseo de limit
-    if (isNaN(Number(limit))) return response.status(400).send({ message: "The limit is invalid" });
-    limit = Number(limit);
-
-    // "Si el limit es menor a cero se devuelve un error"
-    if (limit < 0) return response.status(400).send({ message: "The limit cannot be less than 0" });
-    // Si el límite es menor a la cantidad de productos disponibles entra al condicional
-    if (products.length > limit) {
-      const limitProduct = products.slice(0, limit);
-      return response.status(200).send({ limit, products: limitProduct });
+    if (!(options.sort.price in [-1, 1])) {
+      delete options.sort;
     }
 
-    // Caso de que el limit sea mayor a lo disponible
-    return response.status(200).send({ products });
+    const links = (products) => {
+      let prevLink;
+      let nextLink;
+      if (request.originalUrl.includes("page")) {
+        prevLink = products.hasPrevPage ? request.originalUrl.replace(`page=${products.page}`, `page=${products.prevPage}`) : null;
+        nextLink = products.hasNextPage ? request.originalUrl.replace(`page=${products.page}`, `page=${products.nextPage}`) : null;
+        return { prevLink, nextLink };
+      }
+      if (!request.originalUrl.includes("?")) {
+        prevLink = products.hasPrevPage ? request.originalUrl.concat(`?page=${products.prevPage}`) : null;
+        nextLink = products.hasNextPage ? request.originalUrl.concat(`?page=${products.nextPage}`) : null;
+        return { prevLink, nextLink };
+      }
+      prevLink = products.hasPrevPage ? request.originalUrl.concat(`&page=${products.prevPage}`) : null;
+      nextLink = products.hasNextPage ? request.originalUrl.concat(`&page=${products.nextPage}`) : null;
+      return { prevLink, nextLink };
+    };
+
+    const categories = await pm.categories();
+    const result = categories.some((categ) => categ === category);
+
+    if (result) {
+      const products = await pm.getProducts({ category }, options);
+      const { prevLink, nextLink } = links(products);
+      const { totalPages, prevPage, nextPage, hasNextPage, hasPrevPage, docs } = products;
+
+      return response.status(200).send({
+        status: "success",
+        payload: docs,
+        totalPages,
+        prevPage,
+        nextPage,
+        hasNextPage,
+        hasPrevPage,
+        prevLink,
+        nextLink,
+      });
+    }
+
+    const products = await pm.getProducts({}, options);
+    console.log(products, "Product");
+    const { totalPages, prevPage, nextPage, hasNextPage, hasPrevPage, docs } = products;
+    const { prevLink, nextLink } = links(products);
+
+    return response.status(200).send({
+      status: "success",
+      payload: docs,
+      totalPages,
+      prevPage,
+      nextPage,
+      hasNextPage,
+      hasPrevPage,
+      prevLink,
+      nextLink,
+    });
   } catch (err) {
     console.log(err);
   }
 });
 
-//http://localhost:8080/api/products/
+// Obtener un producto por su ID
 routerP.get("/:pid", async (request, response) => {
   try {
     const { pid } = request.params;
-
-    // Se devuelve el resultado
     const result = await pm.getProductById(pid);
     console.log(result, "resultado");
-    // En caso de que traiga por error en el ID de product
-    if (result.message) return response.status(404).send({ message: `ID: ${pid} not found` });
 
-    // Resultado
+    if (result.message) {
+      return response.status(404).send({ message: `ID: ${pid} not found` });
+    }
+
     return response.status(200).send(result);
   } catch (err) {
     console.log(err);
   }
 });
 
+// Agregar un nuevo producto
 routerP.post("/", async (request, response) => {
   try {
     const product = request.body;
@@ -68,7 +114,9 @@ routerP.post("/", async (request, response) => {
       thumbnails,
     }).every((property) => property);
 
-    if (!checkProduct) return response.status(400).send({ message: "The product doesn't have all the properties" });
+    if (!checkProduct) {
+      return response.status(400).send({ message: "The product doesn't have all the properties" });
+    }
 
     if (
       !(
@@ -81,14 +129,22 @@ routerP.post("/", async (request, response) => {
         typeof category === "string" &&
         Array.isArray(thumbnails)
       )
-    )
-      return response.status(400).send({ message: "type of property is not valid" });
+    ) {
+      return response.status(400).send({ message: "Type of property is not valid" });
+    }
 
-    if (price < 0 || stock < 0) return response.status(400).send({ message: "Product and stock cannot be values less than or equal to zero" });
+    if (price < 0 || stock < 0) {
+      return response.status(400).send({ message: "Product and stock cannot have values less than or equal to zero" });
+    }
 
     const result = await pm.addProduct(product);
     console.log(result);
-    if (result.code === 11000) return response.status(400).send({ message: `E11000 duplicate key error collection: ecommerce.products dup key code: ${result.keyValue.code}` });
+
+    if (result.code === 11000) {
+      return response.status(400).send({
+        message: `E11000 duplicate key error collection: ecommerce.products dup key code: ${result.keyValue.code}`,
+      });
+    }
 
     return response.status(201).send(result);
   } catch (err) {
@@ -96,27 +152,33 @@ routerP.post("/", async (request, response) => {
   }
 });
 
+// Actualizar un producto por su ID
 routerP.put("/:pid", async (request, response) => {
   try {
     const { pid } = request.params;
     const product = request.body;
-
     const result = await pm.updateProduct(pid, product);
     console.log(result);
-    if (result.message) return response.status(404).send({ message: `ID: ${pid} not found` });
 
-    return response.status(200).send(`The product ${result.title} whit ID: ${result._id} was updated`);
+    if (result.message) {
+      return response.status(404).send({ message: `ID: ${pid} not found` });
+    }
+
+    return response.status(200).send(`The product ${result.title} with ID: ${result._id} was updated`);
   } catch (err) {
     console.log(err);
   }
 });
 
+// Eliminar un producto por su ID
 routerP.delete("/:pid", async (request, response) => {
   try {
     const { pid } = request.params;
     const result = await pm.deleteProduct(pid);
-    // console.log(result)
-    if (!result) return response.status(404).send({ message: `ID: ${pid} not found` });
+
+    if (!result) {
+      return response.status(404).send({ message: `ID: ${pid} not found` });
+    }
 
     return response.status(200).send({ message: `ID: ${pid} was deleted` });
   } catch (err) {

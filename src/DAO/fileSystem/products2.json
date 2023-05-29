@@ -1,0 +1,392 @@
+[
+  {
+    "title": "Impresora 3D Creality Ender 3 Pro",
+    "description": "Impresora 3D de escritorio con tamaño de impresión de 220 x 220 x 250 mm, estructura mejorada y función de recuperación de impresión",
+    "price": 269,
+    "code": "E3PRO",
+    "stock": 12,
+    "id": 1,
+    "status": true,
+    "category": "Impresoras 3D",
+    "thumbnails": [
+      "https://via.placeholder.com/150"
+    ]
+  },
+  {
+    "title": "Teléfono inteligente Samsung Galaxy S21",
+    "description": "Teléfono inteligente con pantalla de 6.2 pulgadas, procesador Exynos 2100, cámara de 64 MP y 8 GB de RAM",
+    "price": 799,
+    "code": "SGS21",
+    "stock": 5,
+    "id": 2,
+    "status": true,
+    "category": "Teléfonos inteligentes",
+    "thumbnails": [
+      "https://via.placeholder.com/150"
+    ]
+  },
+  {
+    "title": "Portátil Lenovo ThinkPad X1 Carbon",
+    "description": "Portátil ultraligero con pantalla de 14 pulgadas, procesador Intel Core i7, 16 GB de RAM y 1 TB de almacenamiento SSD",
+    "price": 1899,
+    "code": "LTPX1C",
+    "stock": 8,
+    "id": 3,
+    "status": true,
+    "category": "Portátiles",
+    "thumbnails": [
+      "https://via.placeholder.com/150"
+    ]
+  },
+  {
+    "title": "Smart TV LG OLED55C1",
+    "description": "Televisor OLED de 55 pulgadas con resolución 4K, procesador α9 Gen4 AI, Dolby Vision IQ y HDMI 2.1",
+    "price": 1499,
+    "code": "LG55C1",
+    "stock": 3,
+    "id": 4,
+    "status": true,
+    "category": "Televisores",
+    "thumbnails": [
+      "https://via.placeholder.com/150"
+    ]
+  },
+  {
+    "title": "Consola de videojuegos PlayStation 5",
+    "description": "Consola de próxima generación con unidad de disco Blu-ray, capacidad de 825 GB de almacenamiento, compatibilidad con ray tracing y soporte para 4K",
+    "price": 499,
+    "code": "PS5",
+    "stock": 10,
+    "id": 5,
+    "status": true,
+    "category": "Consolas de videojuegos",
+    "thumbnails": [
+      "https://via.placeholder.com/150"
+    ]
+  },
+  {
+    "title": "Altavoz inteligente Amazon Echo Dot (4ta generación)",
+    "description": "Altavoz inteligente con Alexa, sonido mejorado, diseño compacto y controlador de hogar inteligente",
+    "price": 49,
+    "code": "ECHO4",
+    "stock": 15,
+    "id": 6,
+    "status": true,
+    "category": "Altavoces inteligentes",
+    "thumbnails": [
+      "https://via.placeholder.com/150"
+    ]
+  },
+  {
+    "title": "Cámara réflex Canon EOS 90D",
+    "description": "Cámara réflex digital con sensor CMOS de 32.5 megapíxeles, enfoque automático de 45 puntos y grabación de video 4K",
+    "price": 1199,
+    "code": "EOS90D",
+    "stock": 6,
+    "id": 7,
+    "status": true,
+    "category": "Cámaras",
+    "thumbnails": [
+      "https://via.placeholder.com/150"
+    ]
+  },
+  {
+    "title": "Auriculares inalámbricos Apple AirPods Pro",
+    "description": "Auriculares inalámbricos con cancelación activa de ruido, resistencia al agua y sonido de alta calidad",
+    "price": 249,
+    "code": "AIRPDP",
+    "stock": 20,
+    "id": 8,
+    "status": true,
+    "category": "Auriculares",
+    "thumbnails": [
+      "https://via.placeholder.com/150"
+    ]
+  },
+  {
+    "title": "Monitor gaming MSI Optix MAG341CQ",
+    "description": "Monitor curvo de 34 pulgadas con resolución UWQHD, tasa de actualización de 100Hz y tiempo de respuesta de 8ms",
+    "price": 449,
+    "code": "MAG341CQ",
+    "stock": 4,
+    "id": 9,
+    "status": true,
+    "category": "Monitores",
+    "thumbnails": [
+      "https://via.placeholder.com/150"
+    ]
+  },
+  {
+    "title": "Teclado mecánico Logitech G Pro",
+    "description": "Teclado mecánico para juegos con interruptores GX Blue, retroiluminación RGB y durabilidad de hasta 70 millones de pulsaciones",
+    "price": 129,
+    "code": "GPROKB",
+    "stock": 9,
+    "id": 10,
+    "status": true,
+    "category": "Teclados",
+    "thumbnails": [
+      "https://via.placeholder.com/150"
+    ]
+  },
+  {
+    "title": "Impresora multifuncional HP OfficeJet Pro 9025",
+    "description": "Impresora multifuncional con tecnología de inyección de tinta, velocidad de impresión de 24 ppm y capacidad de impresión dúplex",
+    "price": 249,
+    "code": "HP9025",
+    "stock": 7,
+    "id": 11,
+    "status": true,
+    "category": "Impresoras",
+    "thumbnails": [
+      "https://via.placeholder.com/150"
+    ]
+  },
+  {
+    "title": "Mouse gaming Razer DeathAdder V2",
+    "description": "Mouse para juegos con sensor óptico de 20 000 DPI, switches ópticos y diseño ergonómico",
+    "price": 69,
+    "code": "DAV2",
+    "stock": 14,
+    "id": 12,
+    "status": true,
+    "category": "Ratones",
+    "thumbnails": [
+      "https://via.placeholder.com/150"
+    ]
+  },
+  {
+    "title": "Smartwatch Apple Watch Series 6",
+    "description": "Smartwatch con pantalla Retina siempre encendida, monitor de oxígeno en sangre, electrocardiograma y seguimiento de actividad",
+    "price": 399,
+    "code": "AW6",
+    "stock": 3,
+    "id": 13,
+    "status": true,
+    "category": "Smartwatches",
+    "thumbnails": [
+      "https://via.placeholder.com/150"
+    ]
+  },
+  {
+    "title": "Disco duro externo Samsung T5",
+    "description": "Disco duro externo SSD con capacidad de 1 TB, interfaz USB 3.1 y velocidad de transferencia de hasta 540 MB/s",
+    "price": 129,
+    "code": "T5SSD",
+    "stock": 11,
+    "id": 14,
+    "status": true,
+    "category": "Almacenamiento",
+    "thumbnails": [
+      "https://via.placeholder.com/150"
+    ]
+  },
+  {
+    "title": "Router Wi-Fi TP-Link Archer AX6000",
+    "description": "Router Wi-Fi 6 de doble banda con velocidades de hasta 6000 Mbps, 8 puertos Gigabit y tecnología de formación de haces",
+    "price": 299,
+    "code": "AX6000",
+    "stock": 6,
+    "id": 15,
+    "status": true,
+    "category": "Redes",
+    "thumbnails": [
+      "https://via.placeholder.com/150"
+    ]
+  },
+  {
+    "title": "Batería externa Anker PowerCore 26800",
+    "description": "Batería externa de alta capacidad con 26800 mAh, tecnología PowerIQ y tres puertos USB",
+    "price": 59,
+    "code": "AC26800",
+    "stock": 9,
+    "id": 16,
+    "status": true,
+    "category": "Accesorios",
+    "thumbnails": [
+      "https://via.placeholder.com/150"
+    ]
+  },
+  {
+    "title": "Proyector Epson Home Cinema 2150",
+    "description": "Proyector Full HD con tecnología 3LCD, brillo de 2500 lúmenes y capacidad de proyección inalámbrica",
+    "price": 849,
+    "code": "HC2150",
+    "stock": 5,
+    "id": 17,
+    "status": true,
+    "category": "Proyectores",
+    "thumbnails": [
+      "https://via.placeholder.com/150"
+    ]
+  },
+  {
+    "title": "Tableta gráfica Wacom Intuos Pro",
+    "description": "Tableta gráfica profesional con lápiz sensible a la presión, 8192 niveles de sensibilidad y conectividad Bluetooth",
+    "price": 379,
+    "code": "INTPRO",
+    "stock": 8,
+    "id": 18,
+    "status": true,
+    "category": "Tabletas gráficas",
+    "thumbnails": [
+      "https://via.placeholder.com/150"
+    ]
+  },
+  {
+    "title": "Sistema de sonido Bose Solo 5",
+    "description": "Barra de sonido compacta con tecnología Bluetooth, sonido nítido y modo de diálogo mejorado",
+    "price": 199,
+    "code": "BSOLO5",
+    "stock": 7,
+    "id": 19,
+    "status": true,
+    "category": "Altavoces",
+    "thumbnails": [
+      "https://via.placeholder.com/150"
+    ]
+  },
+  {
+    "title": "Cámara de seguridad Arlo Pro 3",
+    "description": "Cámara de seguridad inalámbrica con resolución 2K, visión nocturna en color y batería recargable",
+    "price": 199,
+    "code": "ARLOP3",
+    "stock": 10,
+    "id": 20,
+    "status": true,
+    "category": "Cámaras de seguridad",
+    "thumbnails": [
+      "https://via.placeholder.com/150"
+    ]
+  },
+  {
+    "title": "Impresora fotográfica Canon SELPHY CP1300",
+    "description": "Impresora fotográfica compacta con tecnología de sublimación de tinta, conectividad Wi-Fi y pantalla LCD de 3.2 pulgadas",
+    "price": 109,
+    "code": "CP1300",
+    "stock": 13,
+    "id": 21,
+    "status": true,
+    "category": "Impresoras fotográficas",
+    "thumbnails": [
+      "https://via.placeholder.com/150"
+    ]
+  },
+  {
+    "title": "Monitor de actividad Fitbit Charge 4",
+    "description": "Monitor de actividad con GPS integrado, monitorización del ritmo cardíaco, resistencia al agua y hasta 7 días de duración de la batería",
+    "price": 149,
+    "code": "FBC4",
+    "stock": 15,
+    "id": 22,
+    "status": true,
+    "category": "Monitores de actividad",
+    "thumbnails": [
+      "https://via.placeholder.com/150"
+    ]
+  },
+  {
+    "title": "Kit de inicio Philips Hue White and Color Ambiance",
+    "description": "Kit de inicio con 3 bombillas inteligentes, puente Hue y compatibilidad con control por voz",
+    "price": 159,
+    "code": "PHHUEKIT",
+    "stock": 6,
+    "id": 23,
+    "status": true,
+    "category": "Iluminación inteligente",
+    "thumbnails": [
+      "https://via.placeholder.com/150"
+    ]
+  },
+  {
+    "title": "Escáner de documentos Epson WorkForce ES-500W",
+    "description": "Escáner de documentos inalámbrico con alimentador automático de documentos, escaneo dúplex y capacidad de escaneo a la nube",
+    "price": 399,
+    "code": "ES500W",
+    "stock": 4,
+    "id": 24,
+    "status": true,
+    "category": "Escáneres",
+    "thumbnails": [
+      "https://via.placeholder.com/150"
+    ]
+  },
+  {
+    "title": "Cámara de acción GoPro HERO9 Black",
+    "description": "Cámara de acción 5K con pantalla táctil, estabilización de video HyperSmooth y resistencia al agua hasta 10 metros",
+    "price": 449,
+    "code": "HERO9",
+    "stock": 8,
+    "id": 25,
+    "status": true,
+    "category": "Cámaras de acción",
+    "thumbnails": [
+      "https://via.placeholder.com/150"
+    ]
+  },
+  {
+    "title": "Cargador inalámbrico Samsung Wireless Charger Pad",
+    "description": "Cargador inalámbrico compatible con dispositivos habilitados para Qi, diseño delgado y antideslizante",
+    "price": 29,
+    "code": "WCPAD",
+    "stock": 16,
+    "id": 26,
+    "status": true,
+    "category": "Cargadores",
+    "thumbnails": [
+      "https://via.placeholder.com/150"
+    ]
+  },
+  {
+    "title": "Altavoz inteligente Amazon Echo Dot (4ta generación)",
+    "description": "Altavoz inteligente con Alexa, sonido mejorado y diseño compacto",
+    "price": 49,
+    "code": "ECHODOT4",
+    "stock": 22,
+    "id": 27,
+    "status": true,
+    "category": "Altavoces inteligentes",
+    "thumbnails": [
+      "https://via.placeholder.com/150"
+    ]
+  },
+  {
+    "title": "Pantalla portátil ASUS ZenScreen MB16AC",
+    "description": "Pantalla portátil Full HD de 15.6 pulgadas con conexión USB-C, panel IPS y diseño ultra delgado",
+    "price": 229,
+    "code": "ZSCREEN",
+    "stock": 5,
+    "id": 28,
+    "status": true,
+    "category": "Monitores portátiles",
+    "thumbnails": [
+      "https://via.placeholder.com/150"
+    ]
+  },
+  {
+    "title": "Impresora de etiquetas DYMO LabelWriter 450",
+    "description": "Impresora de etiquetas térmica con velocidad de impresión de hasta 51 etiquetas por minuto y conexión USB",
+    "price": 99,
+    "code": "DYMO450",
+    "stock": 9,
+    "id": 29,
+    "status": true,
+    "category": "Impresoras de etiquetas",
+    "thumbnails": [
+      "https://via.placeholder.com/150"
+    ]
+  },
+  {
+    "title": "Memoria USB SanDisk Cruzer Glide",
+    "description": "Memoria USB con capacidad de 128 GB, interfaz USB 3.0 y diseño deslizante",
+    "price": 19,
+    "code": "SDGLIDE",
+    "stock": 18,
+    "id": 30,
+    "status": true,
+    "category": "Almacenamiento",
+    "thumbnails": [
+      "https://via.placeholder.com/150"
+    ]
+  }
+]

@@ -4,7 +4,7 @@ const url = "mongodb+srv://hugo29h:eN8xNDCYsEwjkaDL@e-commerce.vh8g3ls.mongodb.n
 const connectToDB = () => {
   try {
     mongoose.connect(url);
-    console.log("connected to DB e-commerce");
+    console.log("Conexion a BD E-commerce");
   } catch (error) {
     console.log(error);
   }

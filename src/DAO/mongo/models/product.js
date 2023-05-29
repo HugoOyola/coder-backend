@@ -1,25 +1,33 @@
 import mongoose from "mongoose";
+import mongoosePaginate from "mongoose-paginate-v2";
 
 const collection = "Products";
 
-// Definición del esquema de la colección de productos
+// Definición del esquema para la colección "Products"
 const schema = new mongoose.Schema({
-  title: String, // Título del producto
-  description: String, // Descripción del producto
-  price: Number, // Precio del producto
+  title: {
+    type: String,
+    index: true,
+  },
+  description: String,
+  price: Number,
   code: {
     type: String,
-    unique: true, // Código único del producto
+    unique: true,
   },
-  stock: Number, // Stock del producto
+  stock: Number,
   status: {
     type: Boolean,
-    default: true, // Estado del producto (por defecto: activo)
+    default: true,
   },
-  category: String, // Categoría del producto
-  thumbnails: [], // Imágenes en miniatura del producto
+  category: String,
+  thumbnails: [],
 });
 
-// Creación y exportación del modelo de producto
+// Agregar el plugin "mongoosePaginate" al esquema para habilitar la paginación
+schema.plugin(mongoosePaginate);
+
+// Creación del modelo "productModel" basado en el esquema "schema"
 const productModel = mongoose.model(collection, schema);
+
 export default productModel;

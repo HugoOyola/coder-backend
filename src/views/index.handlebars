@@ -1,0 +1,95 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <img src="ruta_de_la_imagen" alt="Logo de Mi Tienda" width="50" height="50">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/products">Productos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contacto</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="fas fa-shopping-cart"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- Navbar -->
+
+<div class="container">
+  <section class="mt-4">
+    <div class="container py-5">
+      <h1 class="text-center">Productos</h1>
+      {{#each valueReturned}}
+        <div class="row justify-content-center mb-3">
+          <div class="col-md-12 col-xl-10">
+            <div class="card shadow-0 border rounded-3">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
+                    <div class="bg-image hover-zoom ripple rounded ripple-surface">
+                      <img src="{{this.thumbnails}}" class="w-100" alt="{{this.title}}" />
+                      <a href="#!">
+                        <div class="hover-overlay">
+                          <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);"></div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-lg-6 col-xl-6">
+                    <h5 class="text-danger">{{this.title}}</h5>
+                    <div class="d-flex flex-row">
+                      {{! <div class="text-danger mb-1 me-2">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                      </div> }}
+                      <span class="text-secondary">{{this._id}}</span>
+                    </div>
+                    <div class="mt-1 mb-0 text-muted small">
+                      <span class="text-success">Codigo: {{this.code}}</span>
+                      <span class="text-primary"> • </span>
+                      <span class="text-primary">Categoria: {{this.category}}</span>
+                      <span class="text-primary"> • </span>
+                      <span class="text-warning">Stock: {{this.stock}}</span>
+                      <br />
+                    </div>
+                    <p class="mt-2 mb-4 mb-md-0">{{this.description}}</p>
+                  </div>
+                  <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
+                    <div class="d-flex flex-row align-items-center mb-1">
+                      <h4 class="mb-1 me-1">S/. {{this.price}}</h4>
+                      <span class="text-secondary"> soles</span>
+                    </div>
+                    <h6 class="text-success">Envio gratis a todo el Perú</h6>
+                    <div class="d-flex flex-column mt-4">
+                      <button class="btn btn-primary btn-sm" type="button">Ver Producto</button>
+                      {{!-- <button class="btn btn-outline-primary btn-sm mt-2" type="button">
+                        Agregar al carrito
+                      </button> --}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </section>
+</div>

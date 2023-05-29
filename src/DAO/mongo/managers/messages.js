@@ -1,7 +1,7 @@
 import messageModel from "../models/message.js";
 
 export default class MessagesManager {
-  // Obtener mensajes filtrados por parámetros
+  // Obtener mensajes con los parámetros especificados
   getMessages = async (params) => {
     try {
       return await messageModel.find(params).lean();
