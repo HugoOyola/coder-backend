@@ -20,8 +20,12 @@
   },
   "homepage": "https://github.com/HugoOyola/coder-backend#readme",
   "dependencies": {
+    "bcrypt": "^5.1.0",
+    "connect-mongo": "^5.0.0",
+    "cookie-parser": "^1.4.6",
     "express": "^4.18.2",
     "express-handlebars": "^7.0.7",
+    "express-session": "^1.17.3",
     "mongoose": "^7.2.0",
     "mongoose-paginate-v2": "^1.7.1",
     "nodemon": "^2.0.22",

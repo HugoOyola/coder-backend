@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <img src="ruta_de_la_imagen" alt="Logo de Mi Tienda" width="50" height="50">
+      <img src="/img/icon.png" alt="Logo de Mi Tienda" width="50" height="50"> DigitalMarket
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,11 +19,13 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Contacto</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-            <i class="fas fa-shopping-cart"></i>
-          </a>
-        </li>
+        <button type="button" class="btn btn-primary position-relative">
+          <i class="fas fa-shopping-cart number"></i>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            0
+            <span class="visually-hidden">unread messages</span>
+          </span>
+        </button>
       </ul>
     </div>
   </div>
@@ -31,7 +33,7 @@
 <!-- Navbar -->
 
 <div class="container">
-  <section class="mt-4">
+  <section class="mt-5">
     <div class="container py-5">
       <h1 class="text-center">Productos</h1>
       {{#each valueReturned}}
