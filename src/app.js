@@ -27,10 +27,6 @@ app.set('views', `${__dirname}/views`);
 app.set('view engine', 'handlebars');
 
 
-app.use('/api/products', routerP)
-app.use('/api/carts', routerC)
-app.use('/api/session', routerS)
-app.use('/', routerV);
 
 connectToDB()
 
@@ -48,12 +44,15 @@ app.use(session({
     saveUninitialized: false
 }))
 
+app.use('/api/products', routerP)
+app.use('/api/carts', routerC)
+app.use('/api/session', routerS)
+app.use('/', routerV);
+
 const httpServer = app.listen(PORT, () => {
     try {
         console.log(`Listening to the port ${PORT}\nAcceder a:`);
-        console.log(`\t1). http://localhost:${PORT}/`)
-        console.log(`\t2). http://localhost:${PORT}/realtimeproducts`);
-        console.log(`\t3). http://localhost:${PORT}/chat`);
+        console.log(`\thttp://localhost:${PORT}/products`)
     }
     catch (err) {
         console.log(err);

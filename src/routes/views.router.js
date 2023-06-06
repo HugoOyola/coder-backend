@@ -1,97 +1,168 @@
 import { Router } from "express";
 import ProductManager from "../dao/mongo/managers/products.js";
-
+import CartManager from "../dao/mongo/managers/carts.js";
 const routerV = Router();
-const pm = new ProductManager();
+const pm = new ProductManager()
+const CM = new CartManager()
 
-let cart = [];
+let cart = []
 
-// Renderizar vista principal
-routerV.get("/", async (req, res) => {
-  try {
-    const products = await pm.getProductsView();
-    res.render("index", { valueReturned: products });
-  } catch (err) {
-    console.log(err);
-  }
-});
+routerV.get('/test', (req, res) => {
+    res.render('test')
+})
 
-// Renderizar vista de productos en tiempo real
-routerV.use("/realTimeProducts", (req, res) => {
-  res.render("realTimeProducts", {});
-});
+routerV.get('/', async (req, res) => {
+    try {
+        // Productos
+        const products = await pm.getProductsView();
 
-// Renderizar vista de chat
-routerV.get("/chat", async (req, res) => {
-  res.render("chat");
-});
-
-// Obtener lista de productos
-routerV.get("/products", async (request, response) => {
-  try {
-    let { limit, page, sort, category } = request.query;
-
-    const options = {
-      page: Number(page) || 1,
-      limit: Number(limit) || 10,
-      sort: { price: Number(sort) },
-      lean: true,
-    };
-
-    if (!(options.sort.price in [-1, 1])) {
-      delete options.sort;
+        res.render("index", { valueReturned: products })
+    }
+    catch (err) {
+        console.log(err);
     }
 
-    const links = (products) => {
-      let prevLink;
-      let nextLink;
-      if (request.originalUrl.includes("page")) {
-        prevLink = products.hasPrevPage ? request.originalUrl.replace(`page=${products.page}`, `page=${products.prevPage}`) : null;
-        nextLink = products.hasNextPage ? request.originalUrl.replace(`page=${products.page}`, `page=${products.nextPage}`) : null;
-        return { prevLink, nextLink };
-      }
-      if (!request.originalUrl.includes("?")) {
-        prevLink = products.hasPrevPage ? request.originalUrl.concat(`?page=${products.prevPage}`) : null;
-        nextLink = products.hasNextPage ? request.originalUrl.concat(`?page=${products.nextPage}`) : null;
-        return { prevLink, nextLink };
-      }
-      prevLink = products.hasPrevPage ? request.originalUrl.concat(`&page=${products.prevPage}`) : null;
-      nextLink = products.hasNextPage ? request.originalUrl.concat(`&page=${products.nextPage}`) : null;
-      return { prevLink, nextLink };
-    };
+})
 
-    const categories = await pm.categories();
-    const result = categories.some((categ) => categ === category);
+routerV.use('/realTimeProducts', (req, res) => {
 
-    if (result) {
-      const products = await pm.getProducts({ category }, options);
-      const { prevLink, nextLink } = links(products);
-      const { totalPages, prevPage, nextPage, hasNextPage, hasPrevPage, docs, page } = products;
+    res.render('realTimeProducts', {})
+})
 
-      if (page > totalPages) return response.render("notFound", { pageNotFound: "/products" });
 
-      return response.render("products", { products: docs, totalPages, prevPage, nextPage, hasNextPage, hasPrevPage, prevLink, nextLink, page, cart: cart.length });
+routerV.get('/chat', async (req, res) => {
+    res.render('chat');
+})
+
+routerV.get('/products', async (req, res) => {
+    try {
+        if(!req.session.user) return res.redirect('/login');
+
+        let { limit, page, sort, category } = req.query
+
+
+        const options = {
+            page: Number(page) || 1,
+            limit: Number(limit) || 10,
+            sort: { price: Number(sort) },
+            lean: true
+        };
+
+        if (!(options.sort.price === -1 || options.sort.price === 1)) {
+            delete options.sort
+        }
+
+
+        const links = (products) => {
+            let prevLink;
+            let nextLink;
+            if (req.originalUrl.includes('page')) {
+                prevLink = products.hasPrevPage ? req.originalUrl.replace(`page=${products.page}`, `page=${products.prevPage}`) : null;
+                nextLink = products.hasNextPage ? req.originalUrl.replace(`page=${products.page}`, `page=${products.nextPage}`) : null;
+                return { prevLink, nextLink };
+            }
+            if (!req.originalUrl.includes('?')) {
+                prevLink = products.hasPrevPage ? req.originalUrl.concat(`?page=${products.prevPage}`) : null;
+                nextLink = products.hasNextPage ? req.originalUrl.concat(`?page=${products.nextPage}`) : null;
+                return { prevLink, nextLink };
+            }
+            prevLink = products.hasPrevPage ? req.originalUrl.concat(`&page=${products.prevPage}`) : null;
+            nextLink = products.hasNextPage ? req.originalUrl.concat(`&page=${products.nextPage}`) : null;
+            return { prevLink, nextLink };
+
+        }
+
+        // Devuelve un array con las categorias disponibles y compara con la query "category"
+        const categories = await pm.categories()
+
+        const result = categories.some(categ => categ === category)
+        if (result) {
+
+            const products = await pm.getProducts({ category }, options);
+            const { prevLink, nextLink } = links(products);
+            const { totalPages, prevPage, nextPage, hasNextPage, hasPrevPage, docs, page } = products
+
+            if (page > totalPages) return res.render('notFound', { pageNotFound: '/products' })
+
+            return res.render('products', { products: docs, totalPages, prevPage, nextPage, hasNextPage, hasPrevPage, prevLink, nextLink, page, cart: cart.length });
+        }
+
+        const products = await pm.getProducts({}, options);
+
+        const { totalPages, prevPage, nextPage, hasNextPage, hasPrevPage, docs } = products
+        const { prevLink, nextLink } = links(products);
+
+        if (page > totalPages) return res.render('notFound', { pageNotFound: '/products' })
+
+        return res.render('products', { products: docs, totalPages, prevPage, nextPage, hasNextPage, hasPrevPage, prevLink, nextLink, page, cart: cart.length });
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+routerV.get('/products/inCart', async (req, res) => {
+
+    const productsInCart = await Promise.all(cart.map(async (product) => {
+        const productDB = await pm.getProductById(product._id);
+        return { title: productDB.title, quantity: product.quantity }
+    }))
+
+    return res.send({ cartLength: cart.length, productsInCart })
+})
+
+routerV.post('/products', async (req, res) => {
+    try {
+        const { product, finishBuy } = req.body
+
+        if (product) {
+            if (product.quantity > 0) {
+                const findId = cart.findIndex(productCart => productCart._id === product._id);
+                (findId !== -1) ? cart[findId].quantity += product.quantity : cart.push(product)
+            }
+            else {
+                return res.render('products', { message: 'Quantity must be greater than 0' })
+            }
+        }
+        if (finishBuy) {
+            await CM.addCart(cart)
+            cart.splice(0, cart.length)
+        }
+
+        return res.render('products')
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+routerV.get('/carts/:cid', async (req, res) => {
+    try {
+        const { cid } = req.params
+
+        const result = await CM.getCartById(cid)
+
+        if(result === null || typeof(result) === 'string') return res.render('cart', { result: false, message: 'ID not found' });
+
+        return res.render('cart', { result });
+
+
+    } catch (err) {
+        console.log(err);
     }
 
-    const products = await pm.getProducts({}, options);
-    const { totalPages, prevPage, nextPage, hasNextPage, hasPrevPage, docs } = products;
-    const { prevLink, nextLink } = links(products);
+})
 
-    if (page > totalPages) return response.render("notFound", { pageNotFound: "/products" });
+// routerV.get('/register', (req, res) =>{
+//     res.render('register')
+// })
 
-    return response.render("products", { products: docs, totalPages, prevPage, nextPage, hasNextPage, hasPrevPage, prevLink, nextLink, page, cart: cart.length });
-  } catch (error) {
-    console.log(error);
-  }
-});
+routerV.get('/login', (req, res) => {
+    res.render('login')
+})
 
-// Agregar producto al carrito
-routerV.post("/products", async (req, res) => {
-  const product = req.body;
-  const findId = cart.findIndex((productCart) => productCart._id === product._id);
-  findId !== -1 ? (cart[findId].quantity += product.quantity) : cart.push(product);
-  console.log(cart.length);
-  return res.render("products", { cart: cart.length });
-});
+routerV.get('/register', (req, res) => {
+    res.render('registerForm')
+})
 
-export default routerV;
+
+
+export default routerV
