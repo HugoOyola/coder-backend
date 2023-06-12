@@ -5,12 +5,13 @@ const btnLogout = document.getElementById('logout')
 console.log('jsfront');
 btnLogout.addEventListener('click', () => {
     Swal.fire({
-        title: 'Do you want to close the session?',
+        title: '¿Desea cerrar su sesión?',
         icon: 'question',
         showCancelButton: true,
         confirmButtonColor: '#73be73',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes!'
+        confirmButtonText: 'Cerrar Sesión',
+        cancelButtonText: 'Cancelar'
     }).then(response => {
         if (response.isConfirmed) {
             fetch('http://localhost:8080/api/session/logout')
@@ -18,7 +19,7 @@ btnLogout.addEventListener('click', () => {
         }
         else{
             Swal.fire({
-                title: 'The session has not been closed',
+                title: 'La sesión no se ha cerrado',
                 icon: 'info'
             })
         }
